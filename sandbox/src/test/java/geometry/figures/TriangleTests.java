@@ -24,7 +24,7 @@ public class TriangleTests {
     }
 
     @Test
-    void calculateSemierimeter(){
+    void calculateSemiperimeter(){
         Assertions.assertEquals(12,new Triangle().semiperimeter(6,8,10));
     }
 }
