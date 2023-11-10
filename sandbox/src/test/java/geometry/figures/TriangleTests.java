@@ -12,8 +12,7 @@ public class TriangleTests {
 
     @Test
     void calculateArea() {
-        MathContext context = new MathContext(4, RoundingMode.HALF_UP);
-        BigDecimal result = new BigDecimal(new Triangle(3,3,4).area(), context);
+        BigDecimal result = new BigDecimal(new Triangle(3,3,4).area(), new MathContext(4, RoundingMode.HALF_UP));
         Assertions.assertEquals(4.472, result.doubleValue());
     }
 
