@@ -12,19 +12,13 @@ public class TriangleTests {
 
     @Test
     void calculateArea() {
-        var t = new Triangle(3, 3, 4);
         MathContext context = new MathContext(4, RoundingMode.HALF_UP);
-        BigDecimal result = new BigDecimal(t.area(), context);
+        BigDecimal result = new BigDecimal(new Triangle(3,3,4).area(), context);
         Assertions.assertEquals(4.472, result.doubleValue());
     }
 
     @Test
     void calculatePerimeter() {
-        Assertions.assertEquals(16, new Triangle().perimeter(4, 5, 7));
-    }
-
-    @Test
-    void calculateSemiperimeter(){
-        Assertions.assertEquals(12,new Triangle().semiperimeter(6,8,10));
+        Assertions.assertEquals(16, new Triangle(4,5,7).perimeter());
     }
 }
