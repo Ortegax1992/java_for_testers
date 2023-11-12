@@ -12,12 +12,30 @@ public class TriangleTests {
 
     @Test
     void calculateArea() {
-        BigDecimal result = new BigDecimal(new Triangle(3,3,4).area(), new MathContext(4, RoundingMode.HALF_UP));
+        BigDecimal result = new BigDecimal(new Triangle(3, 3, 4).area(), new MathContext(4, RoundingMode.HALF_UP));
         Assertions.assertEquals(4.472, result.doubleValue());
     }
 
     @Test
     void calculatePerimeter() {
-        Assertions.assertEquals(16, new Triangle(4,5,7).perimeter());
+        Assertions.assertEquals(16, new Triangle(4, 5, 7).perimeter());
+    }
+
+    @Test
+    void cannotCreateTriangeWithNegativeSide() {
+        try {
+            new Triangle(-3, 5, 7);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+        }
+    }
+
+    @Test
+    void cannotCreateTriangleWithUncorrectSumOfTwoSides() {
+        try {
+            new Triangle(3, 4, 8);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+        }
     }
 }
