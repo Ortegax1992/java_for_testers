@@ -1,4 +1,4 @@
-package lesson1.geometry.figures;
+package stqa.geometry.figures;
 
 public record Triangle(double a, double b, double c) {
 

@@ -1,6 +1,6 @@
-package lesson1.geometry;
+package stqa.geometry;
 
-import lesson1.geometry.figures.Triangle;
+import stqa.geometry.figures.Triangle;
 
 public class Geometry {
     public static void main(String[] args) {

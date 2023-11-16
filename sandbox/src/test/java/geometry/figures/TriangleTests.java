@@ -1,6 +1,6 @@
 package geometry.figures;
 
-import lesson1.geometry.figures.Triangle;
+import stqa.geometry.figures.Triangle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
