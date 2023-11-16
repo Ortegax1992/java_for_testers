@@ -31,7 +31,7 @@ public class GroupRemovalTests {
         {
             driver.findElement(By.linkText("groups")).click();
         }
-        if (!isElementPresent(By.name("selected[]"))) ;
+        if (!isElementPresent(By.name("selected[]")))
         {
             driver.findElement(By.name("new")).click();
             driver.findElement(By.name("group_name")).click();
