@@ -1,7 +1,6 @@
 package tests;
 
 import model.ContactsData;
-import model.GroupData;
 import org.junit.jupiter.api.Test;
 
 public class ContactsRemovalTests extends TestBase {

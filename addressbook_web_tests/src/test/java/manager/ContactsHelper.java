@@ -20,7 +20,6 @@ public class ContactsHelper extends HelperBase {
         openHomePage();
         selectAlias();
         removeSelectContact();
-        returnToHomePage();
     }
 
     private void removeSelectContact() {
@@ -33,7 +32,7 @@ public class ContactsHelper extends HelperBase {
     }
 
     private void returnToHomePage() {
-        click(By.linkText("home"));
+        click(By.linkText("home page"));
     }
 
     private void fillContactsForm(ContactsData contact) {
