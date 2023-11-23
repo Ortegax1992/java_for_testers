@@ -5,8 +5,6 @@ import org.openqa.selenium.By;
 
 public class GroupHelper extends HelperBase {
 
-
-
     public GroupHelper(ApplicationManager manager) {
         super(manager);
     }
@@ -15,20 +13,20 @@ public class GroupHelper extends HelperBase {
         openGroupsPage();
         initGroupCreation();
         fillGroupForm(group);
-        submitGroupCreation();
+        submitCreation();
         returnToGroupPage();
     }
 
     public void removeGroup() {
         openGroupsPage();
-        selectGroup();
+        selectAlias();
         removeSelectedGroup();
         returnToGroupPage();
     }
 
     public void modifyGroup(GroupData modifiedGroup) {
         openGroupsPage();
-        selectGroup();
+        selectAlias();
         initGroupModification();
         fillGroupForm(modifiedGroup);
         submitGroupModification();
@@ -44,11 +42,6 @@ public class GroupHelper extends HelperBase {
     public boolean isGroupPresent() {
         openGroupsPage();
         return manager.isElementPresent(By.name("selected[]"));
-    }
-
-
-    private void submitGroupCreation() {
-        click(By.name("submit"));
     }
 
     private void initGroupCreation() {
@@ -77,9 +70,4 @@ public class GroupHelper extends HelperBase {
     private void initGroupModification() {
         click(By.name("edit"));
     }
-
-    private void selectGroup() {
-        click(By.name("selected[]"));
-    }
-
 }

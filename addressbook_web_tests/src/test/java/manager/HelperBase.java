@@ -18,4 +18,12 @@ public class HelperBase {
     protected void click(By locator) {
         manager.driver.findElement(locator).click();
     }
+
+    protected void submitCreation() {
+        click(By.name("submit"));
+    }
+
+    protected void selectAlias() {
+        click(By.name("selected[]"));
+    }
 }
