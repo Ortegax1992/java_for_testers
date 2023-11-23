@@ -9,9 +9,9 @@ public class ContactsHelper extends HelperBase {
         super(manager);
     }
 
-    public void createContact(ContactsData address) {
+    public void createContact(ContactsData contact) {
         addContact();
-        fillContactsForm(address);
+        fillContactsForm(contact);
         submitCreation();
         returnToHomePage();
     }
