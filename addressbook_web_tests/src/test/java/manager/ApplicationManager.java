@@ -9,7 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ApplicationManager {
-    protected WebDriver driver;
+    protected static WebDriver driver;
     private LoginHelper session;
     private GroupHelper groups;
     private ContactsHelper contacts;
