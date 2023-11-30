@@ -22,8 +22,4 @@ public class HelperBase {
     protected void submitCreation() {
         click(By.name("submit"));
     }
-
-    protected void selectAlias() {
-        click(By.name("selected[]"));
-    }
 }

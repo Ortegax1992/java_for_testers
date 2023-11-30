@@ -4,16 +4,33 @@ import model.ContactsData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class ContactsRemovalTests extends TestBase {
 
     @Test
     public void canRemoveContact() {
         if (app.contacts().getCount() == 0) {
-            app.contacts().createContact(new ContactsData());
+            app.contacts().createContact(new ContactsData("","John","","Robert"));
         }
-        int contactsCount = app.contacts().getCount();
-        app.contacts().removeContact();
-        int newContactsCount = app.contacts().getCount();
-        Assertions.assertEquals(contactsCount - 1, newContactsCount);
+        var oldContacts = app.contacts().getList();
+        var rnd = new Random();
+        var index = rnd.nextInt(oldContacts.size());
+        app.contacts().removeContact(oldContacts.get(index));
+        var newContacts = app.contacts().getList();
+        var expectedList = new ArrayList<>(oldContacts);
+        expectedList.remove(index);
+        Assertions.assertEquals(newContacts, expectedList);
+    }
+
+    @Test
+    void  canRemoveAllContacts() {
+        if (app.contacts().getCount() == 0) {
+            app.contacts().createContact(
+                    new ContactsData("","John","","Robert"));
+        }
+        app.contacts().removeAllContacts();
+        Assertions.assertEquals(0, app.contacts().getCount());
     }
 }
