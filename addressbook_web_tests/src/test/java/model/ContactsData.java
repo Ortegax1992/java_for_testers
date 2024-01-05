@@ -1,6 +1,7 @@
 package model;
 
 public record ContactsData(String id, String firstname, String middlename, String lastname) {
+
     public ContactsData() {
         this("", "", "", "");
     }
