@@ -11,8 +11,8 @@ public class ContactsRemovalTests extends TestBase {
 
     @Test
     public void canRemoveContact() {
-        if (app.contacts().getCount() == 0) {
-            app.contacts().createContact(new ContactsData("","John","","Robert"));
+        if (app.hbm().getContactsCount() == 0) {
+            app.hbm().createContact(new ContactsData("","John","","Robert"));
         }
         var oldContacts = app.contacts().getList();
         var rnd = new Random();
@@ -31,6 +31,6 @@ public class ContactsRemovalTests extends TestBase {
                     new ContactsData("","John","","Robert"));
         }
         app.contacts().removeAllContacts();
-        Assertions.assertEquals(0, app.contacts().getCount());
+        Assertions.assertEquals(0, app.hbm().getContactsCount());
     }
 }

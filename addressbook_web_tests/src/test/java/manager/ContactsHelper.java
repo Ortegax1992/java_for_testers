@@ -13,6 +13,7 @@ public class ContactsHelper extends HelperBase {
     }
 
     public void createContact(ContactsData contact) {
+        openHomePage();
         addContact();
         fillContactsForm(contact);
         submitCreation();
