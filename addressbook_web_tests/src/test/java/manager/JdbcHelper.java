@@ -1,6 +1,7 @@
 package manager;
 
 import model.GroupData;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -29,5 +30,17 @@ public class JdbcHelper extends HelperBase {
             throw new RuntimeException();
         }
         return groups;
+    }
+
+    public void checkConsistency() {
+        try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
+             var statement = conn.createStatement();
+             var result = statement.executeQuery("SELECT * FROM address_in_groups ag LEFT JOIN addressbook ab ON ab.id=ag.id WHERE ab.id IS NULL")) {
+            if (result.next()) {
+                throw new IllegalStateException("DB is corrupted");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
