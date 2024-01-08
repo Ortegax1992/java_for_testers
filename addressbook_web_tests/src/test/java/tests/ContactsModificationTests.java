@@ -12,15 +12,15 @@ public class ContactsModificationTests extends TestBase {
 
     @Test
     void canModifyContact() {
-        if (app.contacts().getCount() == 0) {
-            app.contacts().createContact(new ContactsData("","John","","Robert"));
+        if (app.hbm().getContactsCount() == 0) {
+            app.hbm().createContact(new ContactsData("","John","","Robert"));
         }
-        var oldContacts = app.contacts().getList();
+        var oldContacts = app.hbm().getContactsList();
         var rnd = new Random();
         var index = rnd.nextInt(oldContacts.size());
         var testData = new ContactsData().withFirstname("modified firstname");
         app.contacts().modifyContact(oldContacts.get(index), testData);
-        var newContacts = app.contacts().getList();
+        var newContacts = app.hbm().getContactsList();
         var expectedList = new ArrayList<>(oldContacts);
         expectedList.set(index, testData.withId(oldContacts.get(index).id()));
         Comparator<ContactsData> compareById = (o1, o2) -> {
