@@ -113,4 +113,8 @@ public class HibernateHelper extends HelperBase {
             return convertContactsList(session.get(GroupRecord.class, group.id()).contacts);
         });
     }
+
+    public boolean checkingContactInGroup(GroupData group, ContactsData contact) {
+        return getContactsInGroup(group).contains(contact);
+    }
 }

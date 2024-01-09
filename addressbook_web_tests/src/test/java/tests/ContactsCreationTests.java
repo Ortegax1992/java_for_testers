@@ -76,21 +76,4 @@ public class ContactsCreationTests extends TestBase {
                 .withLastname(CommonFunctions.randomString(30));
         app.contacts().createContact(contact);
     }
-
-    @Test
-    public void canCreateContactInGroup() {
-        var contact = new ContactsData()
-                .withFirstname(CommonFunctions.randomString(10))
-                .withMiddlename(CommonFunctions.randomString(20))
-                .withLastname(CommonFunctions.randomString(30));
-        if (app.hbm().getGroupCount() == 0) {
-            app.hbm().createGroup(new GroupData("", "group_name", "group_header", "group_footer"));
-        }
-        var group = app.hbm().getGroupList().get(0);
-
-        var oldRelated = app.hbm().getContactsInGroup(group);
-        app.contacts().createContact(contact, group);
-        var newRelated = app.hbm().getContactsInGroup(group);
-        Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
-    }
 }
