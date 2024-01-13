@@ -8,8 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HibernateHelper extends HelperBase {
 
@@ -29,19 +29,11 @@ public class HibernateHelper extends HelperBase {
     }
 
     static List<GroupData> convertList(List<GroupRecord> records) {
-        List<GroupData> result = new ArrayList<>();
-        for (var record : records) {
-            result.add(convert(record));
-        }
-        return result;
+        return records.stream().map(HibernateHelper::convert).collect(Collectors.toList());
     }
 
     static List<ContactsData> convertContactsList(List<ContactsRecord> records) {
-        List<ContactsData> result = new ArrayList<>();
-        for (var record : records) {
-            result.add(convert(record));
-        }
-        return result;
+        return records.stream().map(HibernateHelper::convert).collect(Collectors.toList());
     }
 
     private static GroupData convert(GroupRecord record) {
@@ -49,7 +41,18 @@ public class HibernateHelper extends HelperBase {
     }
 
     private static ContactsData convert(ContactsRecord record) {
-        return new ContactsData("" + record.id, record.firstname, record.middlename, record.lastname);
+        return new ContactsData().withId("" + record.id)
+                .withFirstname(record.firstname)
+                .withMiddlename(record.middlename)
+                .withLastname(record.lastname)
+                .withHome(record.home)
+                .withMobile(record.mobile)
+                .withWork(record.work)
+                .withSecondary(record.phone2)
+                .withEmail(record.email)
+                .withEmail2(record.email2)
+                .withEmail3(record.email3)
+                .withAddress(record.address);
     }
 
     private static GroupRecord convert(GroupData data) {
@@ -65,7 +68,8 @@ public class HibernateHelper extends HelperBase {
         if ("".equals(id)) {
             id = "0";
         }
-        return new ContactsRecord(Integer.parseInt(id), data.firstname(), data.middlename(), data.lastname());
+        return new ContactsRecord(Integer.parseInt(id), data.firstname(), data.middlename(), data.lastname(),
+                data.home(), data.mobile(), data.work(), data.secondary(), data.address(), data.email(), data.email2(), data.email3());
     }
 
     public List<GroupData> getGroupList() {

@@ -1,6 +1,5 @@
 package tests;
 
-import common.CommonFunctions;
 import model.ContactsData;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
@@ -15,7 +14,7 @@ public class ContactsModificationTests extends TestBase {
     @Test
     void canModifyContact() {
         if (app.hbm().getContactsCount() == 0) {
-            app.hbm().createContact(new ContactsData("", "John", "", "Robert"));
+            app.hbm().createContact(new ContactsData("", "John", "", "Robert", "", "", "", "", "", "", "", ""));
         }
         var oldContacts = app.hbm().getContactsList();
         var rnd = new Random();
@@ -37,7 +36,7 @@ public class ContactsModificationTests extends TestBase {
     public void canCreateContactInGroup() {
         app.groups().removeAllGroups();
         app.contacts().removeAllContacts();
-        app.hbm().createContact(new ContactsData("", "John", "", "Robert"));
+        app.hbm().createContact(new ContactsData("", "John", "", "Robert", "", "", "", "", "", "", "", ""));
         app.hbm().createGroup(new GroupData("", "group_name", "group_header", "group_footer"));
         var oldRelated = app.hbm().getContactsList();
         var rnd = new Random();
@@ -63,7 +62,7 @@ public class ContactsModificationTests extends TestBase {
     public void canRemoveContactFromGroup() {
         app.groups().removeAllGroups();
         app.contacts().removeAllContacts();
-        app.hbm().createContact(new ContactsData("", "John", "", "Robert"));
+        app.hbm().createContact(new ContactsData("", "John", "", "Robert", "", "", "", "", "", "", "", ""));
         app.hbm().createGroup(new GroupData("", "group_name", "group_header", "group_footer"));
         var oldRelated = app.hbm().getContactsList();
         var rnd = new Random();

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import common.CommonFunctions;
 import model.ContactsData;
-import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -55,7 +54,7 @@ public class ContactsCreationTests extends TestBase {
     }
 
     public static List<ContactsData> negativeContactsProvider() {
-        var result = new ArrayList<ContactsData>(List.of(new ContactsData("", "Smit'", "middle", "Robert")));
+        var result = new ArrayList<ContactsData>(List.of(new ContactsData("", "Smit'", "middle", "Robert", "", "", "", "", "", "", "", "")));
         return result;
     }
 

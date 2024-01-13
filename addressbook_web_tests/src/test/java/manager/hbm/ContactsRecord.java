@@ -21,14 +21,14 @@ public class ContactsRecord {
     public String nickname = new String();
     public String company = new String();
     public String title = new String();
-    public String address = new String();
-    public String home = new String();
-    public String mobile = new String();
-    public String work = new String();
+    public String address;
+    public String home;
+    public String mobile;
+    public String work;
     public String fax = new String();
-    public String email = new String();
-    public String email2 = new String();
-    public String email3 = new String();
+    public String email;
+    public String email2;
+    public String email3;
     public String homepage = new String();
     public String im = new String();
     public String im2 = new String();
@@ -40,7 +40,7 @@ public class ContactsRecord {
     public String amonth = "-";
     public String ayear = new String();
     public String address2 = new String();
-    public String phone2 = new String();
+    public String phone2;
     public String photo = new String();
     public String notes = new String();
     public Date created = new Date();
@@ -50,11 +50,19 @@ public class ContactsRecord {
     public ContactsRecord() {
     }
 
-    public ContactsRecord(int id, String firstname, String middlename, String lastname) {
+    public ContactsRecord(int id, String firstname, String middlename, String lastname, String home, String mobile, String work, String phone2,
+                          String address, String email, String email2, String email3) {
         this.id = id;
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
+        this.home = home;
+        this.mobile = mobile;
+        this.work = work;
+        this.phone2 = phone2;
+        this.address = address;
+        this.email = email;
+        this.email2 = email2;
+        this.email3 = email3;
     }
-
 }
