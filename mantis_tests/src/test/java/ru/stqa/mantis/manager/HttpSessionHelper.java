@@ -36,7 +36,7 @@ public class HttpSessionHelper extends HelperBase{
         Request request = new Request.Builder()
                 .url(manager.property("web.baseUrl"))
                 .build();
-        try (Response response = client.newCall(request).execute()){
+        try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) throw new RuntimeException("Unexpected code " + response);
             String body = response.body().string();
             return body.contains("<span class=\"user-info\">");

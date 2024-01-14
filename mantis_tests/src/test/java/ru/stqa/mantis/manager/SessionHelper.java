@@ -18,4 +18,19 @@ public class SessionHelper extends HelperBase {
     public boolean isLoggedIn() {
         return isElementPresent(By.cssSelector("span.user-info"));
     }
+
+    public void registration(String username, String email) {
+        click(By.linkText("Signup for a new account"));
+        type(By.name("username"), username);
+        type(By.name("email"), email);
+        click(By.cssSelector("input[type='submit']"));
+        click(By.linkText("Proceed"));
+    }
+
+    public void followTheLinkAndRegister(String username, String password){
+        type(By.name("realname"), username);
+        type(By.name("password"),password);
+        type(By.name("password_confirm"),password);
+        click(By.xpath("//button[@type=\'submit\']"));
+    }
 }
