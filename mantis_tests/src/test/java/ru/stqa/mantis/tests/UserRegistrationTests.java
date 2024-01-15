@@ -10,6 +10,23 @@ import java.util.regex.Pattern;
 public class UserRegistrationTests extends TestBase {
 
     @Test
+    void canRegisterUserRespApi(){
+        String username = CommonFunctions.randomString(8);
+        String email = String.format("%s@localhost", username);
+        String password = "password";
+        app.jamesApi().addUser(email,password);
+        app.rest().startRegistration(username, email);
+
+        var messages = app.mail().receive(email, password, Duration.ofSeconds(30));
+
+        var url = CommonFunctions.extractUrl(messages.get(0).content());
+
+        app.session().followTheLinkAndRegister(url, username, password);
+        app.http().login(username, password);
+        Assertions.assertTrue(app.http().isLoggedIn());
+    }
+
+    @Test
     void canRegisterUser() {
         String username = CommonFunctions.randomString(8);
         String email = String.format("%s@localhost", username);
@@ -26,7 +43,8 @@ public class UserRegistrationTests extends TestBase {
             app.driver().get(url);
         }
         var name = "name";
-        app.session().followTheLinkAndRegister(name, password);
+        var url = CommonFunctions.extractUrl(text);
+        app.session().followTheLinkAndRegister(url, name, password);
         app.http().login(username, password);
         Assertions.assertTrue(app.http().isLoggedIn());
     }

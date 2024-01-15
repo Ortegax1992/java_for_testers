@@ -27,7 +27,8 @@ public class SessionHelper extends HelperBase {
         click(By.linkText("Proceed"));
     }
 
-    public void followTheLinkAndRegister(String username, String password){
+    public void followTheLinkAndRegister(String url, String username, String password){
+        manager.driver().get(url);
         type(By.name("realname"), username);
         type(By.name("password"),password);
         type(By.name("password_confirm"),password);
