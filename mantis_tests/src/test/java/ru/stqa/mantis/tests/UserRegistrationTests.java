@@ -14,7 +14,9 @@ public class UserRegistrationTests extends TestBase {
         String username = CommonFunctions.randomString(8);
         String email = String.format("%s@localhost", username);
         String password = "password";
+
         app.jamesApi().addUser(email,password);
+
         app.rest().startRegistration(username, email);
 
         var messages = app.mail().receive(email, password, Duration.ofSeconds(30));
@@ -22,6 +24,7 @@ public class UserRegistrationTests extends TestBase {
         var url = CommonFunctions.extractUrl(messages.get(0).content());
 
         app.session().followTheLinkAndRegister(url, username, password);
+        
         app.http().login(username, password);
         Assertions.assertTrue(app.http().isLoggedIn());
     }
