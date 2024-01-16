@@ -1,5 +1,6 @@
 package manager;
 
+import io.qameta.allure.Step;
 import model.ContactsData;
 import model.GroupData;
 import org.openqa.selenium.By;
@@ -17,6 +18,7 @@ public class ContactsHelper extends HelperBase {
         super(manager);
     }
 
+    @Step
     public void createContact(ContactsData contact) {
         openHomePage();
         addContact();
@@ -25,6 +27,7 @@ public class ContactsHelper extends HelperBase {
         returnToHomePage();
     }
 
+    @Step
     public void createContact(ContactsData contact, GroupData group) {
         openHomePage();
         addContact();
@@ -54,6 +57,7 @@ public class ContactsHelper extends HelperBase {
         click(By.name("remove"));
     }
 
+    @Step
     public void removeContact(ContactsData contact) {
         openHomePage();
         selectContact(contact);
@@ -61,6 +65,7 @@ public class ContactsHelper extends HelperBase {
         openHomePage();
     }
 
+    @Step
     public void removeAllContacts() {
         openHomePage();
         selectAllContacts();
@@ -68,6 +73,7 @@ public class ContactsHelper extends HelperBase {
         openHomePage();
     }
 
+    @Step
     public void modifyContact(ContactsData contact, ContactsData modifiedContact) {
         openHomePage();
         initContactModification(contact);
@@ -128,6 +134,7 @@ public class ContactsHelper extends HelperBase {
         return manager.driver.findElements(By.name("selected[]")).size();
     }
 
+    @Step
     public List<ContactsData> getList() {
         var contacts = new ArrayList<ContactsData>();
         var elements = manager.driver.findElements(By.xpath("//tr[@name='entry']"));
@@ -141,6 +148,7 @@ public class ContactsHelper extends HelperBase {
         return contacts;
     }
 
+    @Step
     public void addContactInGroup(GroupData group, ContactsData contact) {
         openHomePage();
         selectGroupToAdd(group);
@@ -149,6 +157,7 @@ public class ContactsHelper extends HelperBase {
         openHomePage();
     }
 
+    @Step
     public void removeContactFromGroup(ContactsData contact, GroupData group) {
         openHomePage();
         selectGroupFilter(group);
@@ -161,6 +170,7 @@ public class ContactsHelper extends HelperBase {
                 String.format("//input[@id='%s']/../../td[6]", contact.id()))).getText();
     }
 
+    @Step
     public Map<String, String> getPhones() {
         openHomePage();
         var result = new HashMap<String, String>();
@@ -173,6 +183,7 @@ public class ContactsHelper extends HelperBase {
         return result;
     }
 
+    @Step
     public Map<String, String> getAddresses() {
         openHomePage();
         var result = new HashMap<String, String>();
