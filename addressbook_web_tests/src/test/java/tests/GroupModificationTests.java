@@ -1,6 +1,7 @@
 package tests;
 
 import common.CommonFunctions;
+import io.qameta.allure.Allure;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,9 @@ public class GroupModificationTests extends TestBase {
         var newGroups = app.hbm().getGroupList();
         var expectedList = new ArrayList<>(oldGroups);
         expectedList.set(index, testData.withId(oldGroups.get(index).id()));
-        Assertions.assertEquals(Set.copyOf(newGroups),Set.copyOf(expectedList));
+        Allure.step("Validation results", step -> {
+            Assertions.assertEquals(Set.copyOf(newGroups), Set.copyOf(expectedList));
+        });
     }
 }
 

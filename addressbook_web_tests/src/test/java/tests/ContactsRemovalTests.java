@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Allure;
 import model.ContactsData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,9 +12,11 @@ public class ContactsRemovalTests extends TestBase {
 
     @Test
     public void canRemoveContact() {
-        if (app.hbm().getContactsCount() == 0) {
-            app.hbm().createContact(new ContactsData("","John","","Robert", "", "", "", "", "", "", "", ""));
-        }
+        Allure.step("Checking precondition", step -> {
+            if (app.hbm().getContactsCount() == 0) {
+                app.hbm().createContact(new ContactsData("", "John", "", "Robert", "", "", "", "", "", "", "", ""));
+            }
+        });
         var oldContacts = app.contacts().getList();
         var rnd = new Random();
         var index = rnd.nextInt(oldContacts.size());
@@ -21,14 +24,18 @@ public class ContactsRemovalTests extends TestBase {
         var newContacts = app.contacts().getList();
         var expectedList = new ArrayList<>(oldContacts);
         expectedList.remove(index);
-        Assertions.assertEquals(newContacts, expectedList);
+        Allure.step("Validation results", step -> {
+            Assertions.assertEquals(newContacts, expectedList);
+        });
     }
 
     @Test
-    void  canRemoveAllContacts() {
-        if (app.hbm().getContactsCount() == 0) {
-            app.hbm().createContact(new ContactsData("","John","","Robert", "", "", "", "", "", "", "", ""));
-        }
+    void canRemoveAllContacts() {
+        Allure.step("Checking precondition", step -> {
+            if (app.hbm().getContactsCount() == 0) {
+                app.hbm().createContact(new ContactsData("", "John", "", "Robert", "", "", "", "", "", "", "", ""));
+            }
+        });
         app.contacts().removeAllContacts();
         Assertions.assertEquals(0, app.hbm().getContactsCount());
     }

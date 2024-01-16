@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Allure;
 import model.ContactsData;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
@@ -13,9 +14,11 @@ public class ContactsModificationTests extends TestBase {
 
     @Test
     void canModifyContact() {
-        if (app.hbm().getContactsCount() == 0) {
-            app.hbm().createContact(new ContactsData("", "John", "", "Robert", "", "", "", "", "", "", "", ""));
-        }
+        Allure.step("Checking precondition", step -> {
+            if (app.hbm().getContactsCount() == 0) {
+                app.hbm().createContact(new ContactsData("", "John", "", "Robert", "", "", "", "", "", "", "", ""));
+            }
+        });
         var oldContacts = app.hbm().getContactsList();
         var rnd = new Random();
         var index = rnd.nextInt(oldContacts.size());
@@ -29,7 +32,9 @@ public class ContactsModificationTests extends TestBase {
         };
         newContacts.sort(compareById);
         expectedList.sort(compareById);
-        Assertions.assertEquals(newContacts, expectedList);
+        Allure.step("Validation results", step -> {
+            Assertions.assertEquals(newContacts, expectedList);
+        });
     }
 
     @Test
@@ -55,7 +60,9 @@ public class ContactsModificationTests extends TestBase {
         };
         expectedContactListInGroup.sort(compareById);
         newContactsListInGroup.sort(compareById);
-        Assertions.assertEquals(expectedContactListInGroup, newContactsListInGroup);
+        Allure.step("Validation results", step -> {
+            Assertions.assertEquals(expectedContactListInGroup, newContactsListInGroup);
+        });
     }
 
     @Test
@@ -81,6 +88,8 @@ public class ContactsModificationTests extends TestBase {
         };
         expectedContactListInGroup.sort(compareById);
         newContactsListInGroup.sort(compareById);
-        Assertions.assertEquals(expectedContactListInGroup, newContactsListInGroup);
+        Allure.step("Validation results", step -> {
+            Assertions.assertEquals(expectedContactListInGroup, newContactsListInGroup);
+        });
     }
 }

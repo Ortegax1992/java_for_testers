@@ -1,6 +1,7 @@
 package tests;
 
 import common.CommonFunctions;
+import io.qameta.allure.Allure;
 import model.ContactsData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,29 +28,30 @@ public class ContactInfoTests extends TestBase {
             );
         }
         var contacts = app.hbm().getContactsList();
-        var expected = contacts.stream().collect(Collectors.toMap(ContactsData::id, contact ->
+        var expectedPhones = contacts.stream().collect(Collectors.toMap(ContactsData::id, contact ->
                 Stream.of(contact.home(), contact.mobile(), contact.work(), contact.secondary())
                         .filter(s -> s != null && !"".equals(s))
                         .collect(Collectors.joining("\n"))
         ));
         var phones = app.contacts().getPhones();
-        Assertions.assertEquals(expected, phones);
 
-        expected = contacts.stream().collect(Collectors.toMap(ContactsData::id, contact ->
+        var expectedAdresses = contacts.stream().collect(Collectors.toMap(ContactsData::id, contact ->
                 Stream.of(contact.address())
-                        .filter(s -> s != null && !"".equals(s))
                         .collect(Collectors.joining("\n"))
         ));
         var addresses = app.contacts().getAddresses();
-        Assertions.assertEquals(expected, addresses);
 
-        expected = contacts.stream().collect(Collectors.toMap(ContactsData::id, contact ->
+        var expectedEmails = contacts.stream().collect(Collectors.toMap(ContactsData::id, contact ->
                 Stream.of(contact.email(), contact.email2(), contact.email3())
                         .filter(s -> s != null && !"".equals(s))
                         .collect(Collectors.joining("\n"))
         ));
         var emails = app.contacts().getEmails();
-        Assertions.assertEquals(expected, emails);
+        Allure.step("Validating results", step -> {
+            Assertions.assertEquals(expectedPhones, phones);
+            Assertions.assertEquals(expectedAdresses, addresses);
+            Assertions.assertEquals(expectedEmails, emails);
+        });
     }
 
     @Test
@@ -69,25 +71,9 @@ public class ContactInfoTests extends TestBase {
                         .collect(Collectors.joining("\n"))
         ));
         var emails = app.contacts().getEmails();
-        Assertions.assertEquals(expected, emails);
-    }
-
-    @Test
-    void testAddresses() {
-        if (app.hbm().getContactsCount() == 0) {
-            app.hbm().createContact(new ContactsData()
-                    .withFirstname(CommonFunctions.randomString(10))
-                    .withLastname(CommonFunctions.randomString(10))
-                    .withAddress("Prospect mira"));
-        }
-        var contacts = app.hbm().getContactsList();
-        var expected = contacts.stream().collect(Collectors.toMap(ContactsData::id, contact ->
-                Stream.of(contact.address())
-                        .filter(s -> s != null && !"".equals(s))
-                        .collect(Collectors.joining("\n"))
-        ));
-        var addresses = app.contacts().getAddresses();
-        Assertions.assertEquals(expected, addresses);
+        Allure.step("Validating results", step -> {
+            Assertions.assertEquals(expected, emails);
+        });
     }
 }
 
